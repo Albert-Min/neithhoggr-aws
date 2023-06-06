@@ -9,23 +9,27 @@ export class EcsClusterStack extends cdk.Stack {
     super(scope, id, props);
 
     // Create a VPC
-    const vpc = new ec2.Vpc(this, "VPC", {
+    const vpc = new ec2.Vpc(this, 'VPC', {
       maxAzs: 3, // Default is all AZs in the region
     });
 
     // Create an ECS cluster
-    const cluster = new ecs.Cluster(this, "Cluster", {
+    const cluster = new ecs.Cluster(this, 'Cluster', {
       vpc: vpc,
     });
 
     // Create an Auto Scaling group
-    const autoScalingGroup = new autoscaling.AutoScalingGroup(this, 'AutoScalingGroup', {
-      vpc: vpc,
-      instanceType: new ec2.InstanceType('t2.micro'),
-      machineImage: new ecs.EcsOptimizedAmi(),
-      desiredCapacity: 3,
-      // other Auto Scaling group properties...
-    });
+    const autoScalingGroup = new autoscaling.AutoScalingGroup(
+      this,
+      'AutoScalingGroup',
+      {
+        vpc: vpc,
+        instanceType: new ec2.InstanceType('t2.micro'),
+        machineImage: new ecs.EcsOptimizedAmi(),
+        desiredCapacity: 3,
+        // other Auto Scaling group properties...
+      },
+    );
 
     // Add the Auto Scaling group to the ECS cluster
     cluster.addAutoScalingGroupCapacity(autoScalingGroup);
