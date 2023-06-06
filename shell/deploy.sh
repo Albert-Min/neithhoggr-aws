@@ -4,7 +4,7 @@
 set -e
 
 # Run cdk diff and capture the output
-output=$(cdk diff)
+output=$(npx cdk diff)
 
 echo $output
 
