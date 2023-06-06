@@ -1,15 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import * as ecr from 'aws-cdk-lib/aws-ecr';
 import { Construct } from 'constructs';
-
-interface ERCRepo {
-  name: string;
-  maxImageCount?: number;
-}
-
-export const DEFAULT_MAX_IMAGE_COUNT = 100;
-
-export const ECR_REPOS: ERCRepo[] = [{ name: 'neithhoggr-openai-api' }];
+import { DEFAULT_MAX_ECR_IMAGE_COUNT, ECR_REPOS } from './constants';
 
 export class EcrStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -22,7 +14,7 @@ export class EcrStack extends cdk.Stack {
           {
             rulePriority: 1,
             description: 'Keep last 100 images',
-            maxImageCount: it.maxImageCount || DEFAULT_MAX_IMAGE_COUNT,
+            maxImageCount: it.maxImageCount || DEFAULT_MAX_ECR_IMAGE_COUNT,
             tagStatus: ecr.TagStatus.ANY,
           },
         ],
