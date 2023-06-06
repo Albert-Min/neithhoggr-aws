@@ -14,14 +14,8 @@ export class EcsClusterStack extends cdk.Stack {
     });
 
     // Create an ECS cluster
-    const cluster = new ecs.Cluster(this, ECS_CLUSTER_NAME, {
+    new ecs.Cluster(this, ECS_CLUSTER_NAME, {
       vpc: vpc,
-    });
-
-    // Add capacity to it
-    cluster.addCapacity('DefaultAutoScalingGroupCapacity', {
-      instanceType: new ec2.InstanceType('t2.micro'),
-      desiredCapacity: 1,
     });
   }
 }
