@@ -3,7 +3,10 @@
 # Exit if any command fails
 set -e
 
-npx cdk diff
+# Run cdk diff and capture the output
+output=$(cdk diff)
+
+echo $output
 
 npx cdk bootstrap
 
