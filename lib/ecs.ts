@@ -3,6 +3,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as autoscaling from 'aws-cdk-lib/aws-autoscaling';
 import { Construct } from 'constructs';
+import { ECS_CLUSTER_NAME } from './constants';
 
 export class EcsClusterStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -26,6 +27,7 @@ export class EcsClusterStack extends cdk.Stack {
     // Create an ECS cluster
     const cluster = new ecs.Cluster(this, 'Cluster', {
       vpc: vpc,
+      clusterName: ECS_CLUSTER_NAME,
     });
 
     // Add capacity provider to the ECS cluster
