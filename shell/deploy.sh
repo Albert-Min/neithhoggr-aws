@@ -17,6 +17,6 @@ do
     echo "No changes to deploy for $stack."
   else
     echo "Changes detected in $stack, running npx cdk deploy."
-    npx cdk deploy $stack
+    npx cdk deploy $stack --require-approval never
   fi
 done
