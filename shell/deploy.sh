@@ -12,7 +12,7 @@ if [[ $output == *"There were no differences"* ]]; then
 else
   echo "Changes detected. Running cdk bootstrap and cdk deploy."
   npx cdk bootstrap
-  npx cdk deploy --all
+  npx cdk deploy --all --require-approval never
 fi
 
 echo "Deployment complete"
