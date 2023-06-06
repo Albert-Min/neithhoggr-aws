@@ -1,7 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
-import * as autoscaling from 'aws-cdk-lib/aws-autoscaling';
 import { Construct } from 'constructs';
 
 export class EcsClusterStack extends cdk.Stack {
@@ -18,20 +17,11 @@ export class EcsClusterStack extends cdk.Stack {
       vpc: vpc,
     });
 
-    // Create an Auto Scaling group
-    const autoScalingGroup = new autoscaling.AutoScalingGroup(
-      this,
-      'AutoScalingGroup',
-      {
-        vpc: vpc,
-        instanceType: new ec2.InstanceType('t2.micro'),
-        machineImage: new ecs.EcsOptimizedAmi(),
-        desiredCapacity: 3,
-        // other Auto Scaling group properties...
-      },
-    );
-
-    // Add the Auto Scaling group to the ECS cluster
-    cluster.addAutoScalingGroupCapacity(autoScalingGroup);
+    // Add capacity (an Auto Scaling group) to the ECS cluster
+    cluster.addCapacity('MyAutoScalingGroup', {
+      instanceType: new ec2.InstanceType('t2.micro'),
+      desiredCapacity: 3,
+      // other Auto Scaling group properties...
+    });
   }
 }
