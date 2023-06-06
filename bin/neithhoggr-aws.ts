@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { NeithhoggrAwsStack } from '../lib/neithhoggr-aws-stack';
+import { EcrStack } from '../lib/ecr';
 
 const app = new cdk.App();
-new NeithhoggrAwsStack(app, 'NeithhoggrAwsStack', {
+new EcrStack(app, 'NeithhoggrAwsStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

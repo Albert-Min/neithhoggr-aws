@@ -45,3 +45,8 @@ jobs:
         with:
           role-to-assume: ${{ vars.AWS_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy to AWS
+        run: |
+          chmod +x ./shell/deploy.sh
+           ./shell/deploy.sh
