@@ -13,9 +13,9 @@ export class EcsClusterStack extends cdk.Stack {
       maxAzs: 3, // Default is all AZs in the region
     });
 
-    const asg = new autoscaling.AutoScalingGroup(this, 'MyFleet', {
+    const asg = new autoscaling.AutoScalingGroup(this, 'ASG', {
       instanceType: ec2.InstanceType.of(
-        ec2.InstanceClass.T2,
+        ec2.InstanceClass.T3,
         ec2.InstanceSize.MICRO,
       ),
       machineImage: ecs.EcsOptimizedImage.amazonLinux2(),
