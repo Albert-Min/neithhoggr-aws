@@ -19,5 +19,13 @@ export class IAMStack extends cdk.Stack {
         'service-role/AmazonECSTaskExecutionRolePolicy',
       ),
     );
+
+    // Add permissions to create log streams and put log events
+    ecsTaskExecutionRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ['logs:CreateLogStream', 'logs:PutLogEvents'],
+        resources: ['arn:aws:logs:*:*:*'],
+      }),
+    );
   }
 }
