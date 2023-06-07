@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of your stack names
-stacks=("NeithhoggrECRStack" "NeithhoggrECSClusterStack" "NeithhoggrIAMStack")
+stacks=("NeithhoggrECRStack" "NeithhoggrECSClusterStack")
 
 # Run cdk bootstrap
 npx cdk bootstrap
