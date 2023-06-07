@@ -3,6 +3,7 @@ import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { EcrStack } from '../lib/ecr';
 import { EcsClusterStack } from '../lib/ecs';
+import { IAMStack } from '../lib/iam';
 
 const app = new cdk.App();
 new EcrStack(app, 'NeithhoggrECRStack', {
@@ -19,3 +20,4 @@ new EcrStack(app, 'NeithhoggrECRStack', {
 });
 
 new EcsClusterStack(app, 'NeithhoggrECSClusterStack');
+new IAMStack(app, 'NeithhoggrIAMStack');
