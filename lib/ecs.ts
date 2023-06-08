@@ -8,11 +8,8 @@ export class EcsClusterStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // Create a VPC for the ECS cluster
-    const vpc = new ec2.Vpc(this, 'VPC', {
-      maxAzs: 2, // Use 2 availability zones within the Free Tier limits
-      natGateways: 0, // Set the number of NAT gateways to 0 to disable their creation
-    });
+    // Use the default VPC
+    const vpc = ec2.Vpc.fromLookup(this, 'VPC', { isDefault: true });
 
     // Create an ECS cluster
     const cluster = new ecs.Cluster(this, 'Cluster', {
