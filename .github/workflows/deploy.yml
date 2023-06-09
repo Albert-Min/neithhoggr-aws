@@ -61,6 +61,7 @@ jobs:
         run: pnpm run lint
 
       - name: Configure AWS credentials
+        id: config-aws
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ env.AWS_GIT_ACTION_ROLE }}
@@ -70,3 +71,6 @@ jobs:
         run: |
           chmod +x ./shell/deploy.sh
            ./shell/deploy.sh
+        env:
+          CDK_DEFAULT_REGION: ${{ env.AWS_REGION }}
+          CDK_DEFAULT_ACCOUNT: ${{ steps.config-aws.outputs.aws-account-id }}

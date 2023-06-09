@@ -5,6 +5,7 @@ import { EcrStack } from '../lib/ecr';
 import { EcsClusterStack } from '../lib/ecs';
 
 const app = new cdk.App();
+
 new EcrStack(app, 'NeithhoggrECRStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
@@ -18,4 +19,9 @@ new EcrStack(app, 'NeithhoggrECRStack', {
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
 
-new EcsClusterStack(app, 'NeithhoggrECSClusterStack');
+new EcsClusterStack(app, 'NeithhoggrECSClusterStack', {
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION,
+  },
+});
